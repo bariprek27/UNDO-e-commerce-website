@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Circular Story | UNDO — Pre-Loved, Reimagined</title>
+  <meta name="description"
+    content="Why extending garment life matters. Learn about UNDO's circular fashion philosophy, care guidelines, and reuse model.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: { DEFAULT: '#233D35', light: '#2E5248' },
+            ivory: { DEFAULT: '#F7F3EB', dark: '#EDE8DE' },
+            sage: '#DCE4D8',
+            orange: '#C76B45',
+            charcoal: '#252722',
+            grey: '#77786F'
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="bg-ivory text-charcoal font-sans antialiased flex flex-col min-h-screen">
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container py-4 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="undo-brand" aria-label="UNDO Home">
+          <img src="assets/images/logo.png" alt="UNDO Logo" class="undo-logo-img">
+          <span class="undo-wordmark"></span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-6" aria-label="Primary Navigation">
+          <a href="shop.html" class="nav-link">Shop All</a>
+          <a href="shop.html?category=Clothing" class="nav-link">Clothing</a>
+          <a href="shop.html?category=Shoes" class="nav-link">Shoes</a>
+          <a href="shop.html?category=Bags" class="nav-link">Bags</a>
+          <a href="shop.html?category=Home%20%26%20Living" class="nav-link">Home & Living</a>
+          <a href="about.html" class="nav-link is-active" data-nav-link>The Circular Story</a>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="sell.html" class="btn-primary text-xs py-2 px-3.5 hidden sm:inline-flex">Sell an Item</a>
+        <a href="wishlist.html" class="nav-icon-btn" aria-label="Wishlist">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+          <span class="nav-badge" data-wishlist-count style="display:none;">0</span>
+        </a>
+        <a href="cart.html" class="nav-icon-btn" aria-label="Cart">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+            <path d="M3 6h18" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          <span class="nav-badge" data-cart-count style="display:none;">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="flex-1">
+
+    <!-- HERO EDITORIAL -->
+    <section class="section-pad bg-forest text-ivory">
+      <div class="container max-w-4xl text-center">
+        <span class="text-xs font-semibold uppercase tracking-widest text-sage block mb-3">Our Core Philosophy</span>
+        <h1 class="font-serif text-4xl md:text-5xl leading-tight mb-6">
+          Good things deserve another round.
+        </h1>
+        <p class="text-ivory/80 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+          UNDO was conceived as an antidote to disposable fashion culture. We believe the most sustainable garment is
+          the one that has already been made.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4-STEP CIRCULAR MODEL -->
+    <section class="section-pad container max-w-5xl">
+      <div class="text-center max-w-xl mx-auto mb-12">
+        <span class="section-eyebrow">How It Operates</span>
+        <h2 class="section-title">The Circular Lifecycle</h2>
+        <p class="section-subtitle mx-auto">From one wardrobe to another, without ending up in landfills.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="p-6 bg-white border border-ivory-dark rounded">
+          <span class="font-serif text-2xl text-forest font-bold block mb-2">01</span>
+          <h3 class="font-semibold text-base text-charcoal mb-2">Discovery</h3>
+          <p class="text-xs text-grey leading-relaxed">
+            Community members inspect their closets for quality pieces they no longer wear and list them with
+            transparent notes.
+          </p>
+        </div>
+
+        <div class="p-6 bg-white border border-ivory-dark rounded">
+          <span class="font-serif text-2xl text-forest font-bold block mb-2">02</span>
+          <h3 class="font-semibold text-base text-charcoal mb-2">Transparent Curation</h3>
+          <p class="text-xs text-grey leading-relaxed">
+            Each listing transparently details sizing, fabric feel, condition, and any signs of gentle wear so shoppers
+            know exactly what they receive.
+          </p>
+        </div>
+
+        <div class="p-6 bg-white border border-ivory-dark rounded">
+          <span class="font-serif text-2xl text-forest font-bold block mb-2">03</span>
+          <h3 class="font-semibold text-base text-charcoal mb-2">Rewearing & Love</h3>
+          <p class="text-xs text-grey leading-relaxed">
+            A new owner styles the piece, giving it years of renewed utility and personal expression instead of fresh
+            manufacturing impact.
+          </p>
+        </div>
+
+        <div class="p-6 bg-white border border-ivory-dark rounded">
+          <span class="font-serif text-2xl text-forest font-bold block mb-2">04</span>
+          <h3 class="font-semibold text-base text-charcoal mb-2">Passing It Forward</h3>
+          <p class="text-xs text-grey leading-relaxed">
+            When you're ready for a change, simply list the piece back onto UNDO for someone else to enjoy. The loop
+            continues indefinitely.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARE & REPAIR GUIDE -->
+    <section id="sustainability" class="section-pad bg-white border-y border-ivory-dark">
+      <div class="container max-w-4xl">
+        <div class="mb-10 text-center">
+          <span class="section-eyebrow">Practical Longevity</span>
+          <h2 class="section-title">The Garment Care Manifesto</h2>
+          <p class="section-subtitle mx-auto">
+            Small daily habits make textiles endure for decades. Here are our essential principles for making pre-loved
+            pieces last.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
+          <div class="p-5 bg-ivory rounded border border-ivory-dark">
+            <h3 class="font-semibold text-sm text-charcoal mb-2">Wash Cold, Line Dry</h3>
+            <p class="text-grey leading-relaxed">
+              High heat is the primary cause of fabric degradation, shrinking, and colour loss. Washing at 30°C or cold
+              preserves denim fibres and delicate knits.
+            </p>
+          </div>
+
+          <div class="p-5 bg-ivory rounded border border-ivory-dark">
+            <h3 class="font-semibold text-sm text-charcoal mb-2">Visible Mending</h3>
+            <p class="text-grey leading-relaxed">
+              A missing button, small tear, or scuff is not a reason to discard. Sashiko stitching, darning, and leather
+              conditioning add authentic character.
+            </p>
+          </div>
+
+          <div class="p-5 bg-ivory rounded border border-ivory-dark">
+            <h3 class="font-semibold text-sm text-charcoal mb-2">Know Your Measurements</h3>
+            <p class="text-grey leading-relaxed">
+              Vintage tag sizes often differ from modern vanity sizing. Compare actual chest, waist, and length
+              measurements to eliminate return shipping waste.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACADEMIC CONTEXT CARD -->
+    <section class="section-pad container max-w-3xl text-center">
+      <div class="p-8 bg-sage/30 rounded border border-sage">
+        <span class="text-xs font-semibold uppercase tracking-widest text-forest block mb-2">Project Design
+          Documentation</span>
+        <h2 class="font-serif text-2xl text-charcoal mb-3">Academic Context & Research Rationale</h2>
+        <p class="text-xs text-grey leading-relaxed mb-6">
+          UNDO is created as a comprehensive Product Design group project. It investigates user trust in second-hand
+          marketplaces, ergonomic thumb-reach in mobile commerce, WCAG 2.1 AA accessibility compliance, and honest
+          circular-economy messaging without greenwashing.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 text-xs">
+          <a href="shop.html" class="btn-primary py-2 px-4">Browse Marketplace</a>
+          <a href="sell.html" class="btn-secondary py-2 px-4">Test Seller Flow</a>
+          <a href="app.html" class="btn-orange py-2 px-4">Mobile App Prototype</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+    <a href="index.html" class="mobile-bottom-nav__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      </svg>
+      <span>Home</span>
+    </a>
+    <a href="shop.html" class="mobile-bottom-nav__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.3-4.3" />
+      </svg>
+      <span>Explore</span>
+    </a>
+    <a href="sell.html" class="mobile-bottom-nav__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 8v8" />
+        <path d="M8 12h8" />
+      </svg>
+      <span>Sell</span>
+    </a>
+    <a href="wishlist.html" class="mobile-bottom-nav__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path
+          d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+      </svg>
+      <span>Saved</span>
+    </a>
+    <a href="account.html" class="mobile-bottom-nav__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </svg>
+      <span>Account</span>
+    </a>
+  </nav>
+
+  <footer class="site-footer pt-12 pb-8 mt-auto">
+    <div class="container text-center text-xs text-ivory/60 space-y-2">
+      <div class="flex items-center justify-center gap-2 mb-2">
+        <img src="assets/images/logo.png" alt="UNDO Logo" class="h-8 w-8 object-contain rounded bg-ivory p-0.5">
+        <span class="font-serif text-lg text-ivory"></span>
+      </div>
+      <p>A circular-economy marketplace prototype for academic product design evaluation.</p>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/shared.js"></script>
+</body>
+
+</html>

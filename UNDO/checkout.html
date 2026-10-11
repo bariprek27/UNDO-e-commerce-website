@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulated Checkout | UNDO — Pre-Loved, Reimagined</title>
+  <meta name="description" content="Complete your simulated second-hand order demonstration.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: { DEFAULT: '#233D35', light: '#2E5248' },
+            ivory: { DEFAULT: '#F7F3EB', dark: '#EDE8DE' },
+            sage: '#DCE4D8',
+            orange: '#C76B45',
+            charcoal: '#252722',
+            grey: '#77786F'
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="bg-ivory text-charcoal font-sans antialiased flex flex-col min-h-screen">
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header with Simplicity for Checkout -->
+  <header class="site-header">
+    <div class="container py-4 flex items-center justify-between">
+      <a href="index.html" class="undo-brand" aria-label="UNDO Home">
+        <img src="assets/images/logo.png" alt="UNDO Logo" class="undo-logo-img">
+        <span class="undo-wordmark"></span>
+      </a>
+      <span class="text-xs bg-sage/70 text-forest px-3 py-1 rounded font-medium">Demo Checkout Mode</span>
+      <a href="cart.html" class="text-xs text-grey hover:text-charcoal">Return to Cart</a>
+    </div>
+  </header>
+
+  <main id="main-content" class="flex-1 container py-8">
+    <div class="max-w-4xl mx-auto">
+
+      <!-- Progress Stepper -->
+      <nav id="checkout-steps-bar" class="checkout-steps mb-8 border-b border-ivory-dark pb-6"
+        aria-label="Checkout Progress">
+        <div class="checkout-step is-active" id="step-nav-1">
+          <div class="checkout-step__num">1</div>
+          <span class="checkout-step__label">Contact</span>
+          <div class="checkout-step__line"></div>
+        </div>
+        <div class="checkout-step" id="step-nav-2">
+          <div class="checkout-step__num">2</div>
+          <span class="checkout-step__label">Address</span>
+          <div class="checkout-step__line"></div>
+        </div>
+        <div class="checkout-step" id="step-nav-3">
+          <div class="checkout-step__num">3</div>
+          <span class="checkout-step__label">Delivery</span>
+          <div class="checkout-step__line"></div>
+        </div>
+        <div class="checkout-step" id="step-nav-4">
+          <div class="checkout-step__num">4</div>
+          <span class="checkout-step__label">Payment</span>
+        </div>
+      </nav>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+        <!-- LEFT COLUMN: Multi-Step Panes (Col 1 to 7) -->
+        <div class="lg:col-span-7">
+
+          <!-- STEP 1: CONTACT DETAILS -->
+          <div id="step-pane-1" class="checkout-step-pane bg-white border border-ivory-dark rounded p-6">
+            <h2 class="font-serif text-2xl text-charcoal mb-4">1. Contact Information</h2>
+            <p class="text-xs text-grey mb-6">Enter your details for delivery status notifications.</p>
+
+            <div class="space-y-4">
+              <div class="form-group">
+                <label for="input-name" class="form-label">Full Name *</label>
+                <input type="text" id="input-name" class="form-input text-sm" placeholder="e.g. Ananya Sharma" required>
+                <p id="err-name" class="form-error hidden text-xs text-orange mt-1"></p>
+              </div>
+
+              <div class="form-group">
+                <label for="input-email" class="form-label">Email Address *</label>
+                <input type="email" id="input-email" class="form-input text-sm" placeholder="name@example.com" required>
+                <p id="err-email" class="form-error hidden text-xs text-orange mt-1"></p>
+              </div>
+
+              <div class="form-group">
+                <label for="input-phone" class="form-label">10-Digit Mobile Number (+91) *</label>
+                <div class="flex">
+                  <span
+                    class="inline-flex items-center px-3 text-xs bg-ivory text-grey border border-r-0 border-ivory-dark rounded-l">+91</span>
+                  <input type="tel" id="input-phone" class="form-input rounded-l-none text-sm" placeholder="9876543210"
+                    maxlength="10" required>
+                </div>
+                <p id="err-phone" class="form-error hidden text-xs text-orange mt-1"></p>
+              </div>
+
+              <button type="button" id="btn-to-step-2"
+                class="btn-primary w-full justify-center py-3 mt-4 text-sm font-medium">
+                Continue to Shipping Address →
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 2: SHIPPING ADDRESS -->
+          <div id="step-pane-2" class="checkout-step-pane bg-white border border-ivory-dark rounded p-6 hidden">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="font-serif text-2xl text-charcoal">2. Shipping Address</h2>
+              <button type="button" data-back-to-step="1" class="text-xs text-grey hover:underline">← Edit
+                Contact</button>
+            </div>
+
+            <div class="space-y-4">
+              <div class="form-group">
+                <label for="input-address" class="form-label">Flat / House / Street Address *</label>
+                <input type="text" id="input-address" class="form-input text-sm"
+                  placeholder="e.g. 42 Indiranagar 12th Main" required>
+                <p id="err-address" class="form-error hidden text-xs text-orange mt-1"></p>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div class="form-group">
+                  <label for="input-city" class="form-label">City *</label>
+                  <input type="text" id="input-city" class="form-input text-sm" placeholder="e.g. Bengaluru" required>
+                  <p id="err-city" class="form-error hidden text-xs text-orange mt-1"></p>
+                </div>
+                <div class="form-group">
+                  <label for="input-pincode" class="form-label">6-Digit PIN Code *</label>
+                  <input type="text" id="input-pincode" class="form-input text-sm" placeholder="560038" maxlength="6"
+                    required>
+                  <p id="err-pincode" class="form-error hidden text-xs text-orange mt-1"></p>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="input-state" class="form-label">State</label>
+                <div class="form-select-wrap">
+                  <select id="input-state" class="form-select text-sm">
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Delhi NCR">Delhi NCR</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="West Bengal">West Bengal</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Kerala">Kerala</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="flex gap-3 pt-4">
+                <button type="button" data-back-to-step="1" class="btn-secondary flex-1 justify-center py-2.5 text-xs">
+                  Back
+                </button>
+                <button type="button" id="btn-to-step-3"
+                  class="btn-primary flex-2 justify-center py-2.5 text-xs font-medium">
+                  Continue to Delivery Method →
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3: DELIVERY METHOD -->
+          <div id="step-pane-3" class="checkout-step-pane bg-white border border-ivory-dark rounded p-6 hidden">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="font-serif text-2xl text-charcoal">3. Delivery Method</h2>
+              <button type="button" data-back-to-step="2" class="text-xs text-grey hover:underline">← Edit
+                Address</button>
+            </div>
+
+            <div class="space-y-3 mb-6">
+              <label class="flex items-start gap-3 p-3.5 border border-forest bg-sage/20 rounded cursor-pointer">
+                <input type="radio" name="delivery-method" value="standard" checked class="mt-1 accent-forest">
+                <div class="flex-1 text-xs">
+                  <div class="flex justify-between font-semibold text-charcoal text-sm">
+                    <span>Carbon-Neutral Standard Delivery</span>
+                    <span>₹99 (or Free >₹1500)</span>
+                  </div>
+                  <p class="text-grey mt-0.5">Estimated 3–5 working days. Consolidated eco-packaging.</p>
+                </div>
+              </label>
+
+              <label
+                class="flex items-start gap-3 p-3.5 border border-ivory-dark rounded cursor-pointer hover:border-forest">
+                <input type="radio" name="delivery-method" value="express" class="mt-1 accent-forest">
+                <div class="flex-1 text-xs">
+                  <div class="flex justify-between font-semibold text-charcoal text-sm">
+                    <span>Priority Express Courier</span>
+                    <span>₹179</span>
+                  </div>
+                  <p class="text-grey mt-0.5">Estimated 1–2 working days to major metros.</p>
+                </div>
+              </label>
+            </div>
+
+            <div class="flex gap-3">
+              <button type="button" data-back-to-step="2" class="btn-secondary flex-1 justify-center py-2.5 text-xs">
+                Back
+              </button>
+              <button type="button" id="btn-to-step-4"
+                class="btn-primary flex-2 justify-center py-2.5 text-xs font-medium">
+                Continue to Review & Payment →
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 4: ORDER REVIEW & SIMULATED PAYMENT -->
+          <div id="step-pane-4" class="checkout-step-pane bg-white border border-ivory-dark rounded p-6 hidden">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="font-serif text-2xl text-charcoal">4. Review & Demo Payment</h2>
+              <button type="button" data-back-to-step="3" class="text-xs text-grey hover:underline">← Edit
+                Delivery</button>
+            </div>
+
+            <div class="p-3 bg-sage/40 border border-sage rounded mb-6 text-xs text-forest">
+              <strong class="font-semibold block mb-0.5">Academic Prototype Notice:</strong>
+              No real payments are collected. Select any simulated payment method below to complete the demo checkout
+              journey.
+            </div>
+
+            <div class="space-y-3 mb-6">
+              <label class="flex items-center gap-3 p-3.5 border border-forest bg-sage/10 rounded cursor-pointer">
+                <input type="radio" name="payment-method" value="upi-demo" checked class="accent-forest">
+                <div class="text-xs">
+                  <span class="font-semibold text-charcoal text-sm block">UPI (Simulated GPay / PhonePe / Paytm)</span>
+                  <span class="text-grey">Instant dummy validation</span>
+                </div>
+              </label>
+
+              <label
+                class="flex items-center gap-3 p-3.5 border border-ivory-dark rounded cursor-pointer hover:border-forest">
+                <input type="radio" name="payment-method" value="cod-demo" class="accent-forest">
+                <div class="text-xs">
+                  <span class="font-semibold text-charcoal text-sm block">Cash on Delivery (Simulated)</span>
+                  <span class="text-grey">Pay upon physical inspection</span>
+                </div>
+              </label>
+            </div>
+
+            <div class="flex gap-3">
+              <button type="button" data-back-to-step="3" class="btn-secondary flex-1 justify-center py-2.5 text-xs">
+                Back
+              </button>
+              <button type="button" id="btn-place-order"
+                class="btn-primary flex-2 justify-center py-3 text-sm font-semibold">
+                Place Simulated Order
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 5: CONFIRMATION SUCCESS PANE -->
+          <div id="step-pane-confirmation"
+            class="checkout-step-pane bg-white border border-ivory-dark rounded p-8 hidden text-center">
+            <div class="w-16 h-16 bg-sage text-forest rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+
+            <span class="section-eyebrow">Order Placed Successfully</span>
+            <h2 class="font-serif text-3xl text-charcoal mt-1 mb-2">Thank you for giving clothes a second life.</h2>
+            <p class="text-xs text-grey max-w-md mx-auto mb-6">
+              Your simulated circular order has been confirmed. A receipt and seller handover tracking update have been
+              recorded in your local demo history.
+            </p>
+
+            <div class="p-4 bg-ivory rounded border border-ivory-dark text-left text-xs mb-6 space-y-2">
+              <div class="flex justify-between">
+                <span class="text-grey">Demo Order Ref:</span>
+                <span id="conf-order-id" class="font-mono font-bold text-forest"></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-grey">Estimated Total:</span>
+                <span id="conf-order-total" class="font-semibold text-charcoal"></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-grey">Dispatch Destination:</span>
+                <span id="conf-order-address" class="text-charcoal text-right max-w-xs"></span>
+              </div>
+            </div>
+
+            <div id="conf-order-items" class="text-left mb-6">
+              <!-- Populated by checkout.js -->
+            </div>
+
+            <div class="flex flex-wrap items-center justify-center gap-4">
+              <a href="shop.html" class="btn-primary text-xs py-2.5 px-5">Continue Exploring</a>
+              <a href="account.html" class="btn-secondary text-xs py-2.5 px-5">View in Account History</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: Order Summary (Col 8 to 12) -->
+        <div id="checkout-right-summary" class="lg:col-span-5">
+          <div class="bg-white border border-ivory-dark rounded p-6 sticky top-24">
+            <h3 class="font-serif text-lg text-charcoal pb-3 border-b border-ivory-dark mb-4">In Your Order</h3>
+
+            <div id="checkout-items-summary" class="mb-4 max-h-60 overflow-y-auto pr-1">
+              <!-- Populated by checkout.js -->
+            </div>
+
+            <div class="space-y-2 text-xs border-t border-ivory-dark pt-4">
+              <div class="flex justify-between text-grey">
+                <span>Subtotal</span>
+                <span id="summary-subtotal" class="font-semibold text-charcoal">₹0</span>
+              </div>
+              <div class="flex justify-between text-grey">
+                <span>Estimated Shipping</span>
+                <span id="summary-shipping" class="font-semibold text-charcoal">₹99</span>
+              </div>
+              <div class="border-t border-ivory-dark pt-3 flex justify-between font-bold text-sm text-charcoal">
+                <span>Total Amount</span>
+                <span id="summary-total">₹0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer pt-12 pb-8 mt-auto">
+    <div class="container text-center text-xs text-ivory/60 space-y-2">
+      <div class="flex items-center justify-center gap-2 mb-2">
+        <img src="assets/images/logo.png" alt="UNDO Logo" class="h-8 w-8 object-contain rounded bg-ivory p-0.5">
+        <span class="font-serif text-lg text-ivory">UNDO</span>
+      </div>
+      <p>Simulated checkout interface for Product Design demonstration.</p>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/checkout.js"></script>
+</body>
+
+</html>

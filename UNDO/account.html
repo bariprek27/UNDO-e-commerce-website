@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account & Profile | UNDO — Pre-Loved, Reimagined</title>
+  <meta name="description" content="View your mock circular fashion profile, order tracking, and pre-loved listings.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: { DEFAULT: '#233D35', light: '#2E5248' },
+            ivory: { DEFAULT: '#F7F3EB', dark: '#EDE8DE' },
+            sage: '#DCE4D8',
+            orange: '#C76B45',
+            charcoal: '#252722',
+            grey: '#77786F'
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="bg-ivory text-charcoal font-sans antialiased flex flex-col min-h-screen">
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container py-4 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="undo-brand" aria-label="UNDO Home">
+          <img src="assets/images/logo.png" alt="UNDO Logo" class="undo-logo-img">
+          <span class="undo-wordmark"></span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-6" aria-label="Primary Navigation">
+          <a href="shop.html" class="nav-link">Shop All</a>
+          <a href="shop.html?category=Clothing" class="nav-link">Clothing</a>
+          <a href="shop.html?category=Shoes" class="nav-link">Shoes</a>
+          <a href="shop.html?category=Bags" class="nav-link">Bags</a>
+          <a href="shop.html?category=Home%20%26%20Living" class="nav-link">Home & Living</a>
+          <a href="about.html" class="nav-link">The Circular Story</a>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="sell.html" class="btn-primary text-xs py-2 px-3.5 hidden sm:inline-flex">Sell an Item</a>
+        <a href="wishlist.html" class="nav-icon-btn" aria-label="Wishlist">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+          <span class="nav-badge" data-wishlist-count style="display:none;">0</span>
+        </a>
+        <a href="account.html" class="nav-icon-btn is-active" aria-label="Account">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+        </a>
+        <a href="cart.html" class="nav-icon-btn" aria-label="Cart">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+            <path d="M3 6h18" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          <span class="nav-badge" data-cart-count style="display:none;">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="flex-1 container py-8">
+    <div class="max-w-4xl mx-auto">
+
+      <!-- PANE A: AUTH STATE (When not signed in to demo) -->
+      <div id="account-auth-pane" class="bg-white border border-ivory-dark rounded p-8 max-w-md mx-auto hidden">
+        <div class="text-center mb-6">
+          <span class="section-eyebrow">Demo Authentication</span>
+          <h1 class="font-serif text-2xl text-charcoal">Sign in to UNDO</h1>
+          <p class="text-xs text-grey mt-1">Local prototype mode • Enter any mock email to sign in</p>
+        </div>
+
+        <div class="flex border-b border-ivory-dark mb-6 text-sm">
+          <button id="tab-sign-in" class="flex-1 py-2 font-medium border-b-2 border-forest text-forest text-center">
+            Sign In
+          </button>
+          <button id="tab-sign-up"
+            class="flex-1 py-2 font-medium border-b-2 border-transparent text-grey text-center hover:text-charcoal">
+            Join Community
+          </button>
+        </div>
+
+        <!-- Sign In Form -->
+        <form id="form-sign-in" class="space-y-4">
+          <div class="form-group">
+            <label for="signin-email" class="form-label">Email Address</label>
+            <input type="email" id="signin-email" class="form-input text-sm" placeholder="demo.user@example.com"
+              value="demo.shopper@undo.market" required>
+          </div>
+          <div class="form-group">
+            <label for="signin-password" class="form-label">Password (Mock)</label>
+            <input type="password" id="signin-password" class="form-input text-sm" value="password123">
+          </div>
+          <button type="submit" class="btn-primary w-full justify-center py-2.5 text-xs font-semibold">
+            Continue to Demo Profile
+          </button>
+        </form>
+
+        <!-- Sign Up Form -->
+        <form id="form-sign-up" class="space-y-4 hidden">
+          <div class="form-group">
+            <label for="signup-name" class="form-label">Full Name</label>
+            <input type="text" id="signup-name" class="form-input text-sm" placeholder="e.g. Diya Sen">
+          </div>
+          <div class="form-group">
+            <label for="signup-email" class="form-label">Email Address</label>
+            <input type="email" id="signup-email" class="form-input text-sm" placeholder="diya@example.com">
+          </div>
+          <button type="submit" class="btn-primary w-full justify-center py-2.5 text-xs font-semibold">
+            Create Demo Account
+          </button>
+        </form>
+      </div>
+
+      <!-- PANE B: PROFILE DASHBOARD (When signed in) -->
+      <div id="account-profile-pane">
+
+        <!-- Profile Header -->
+        <div
+          class="bg-white border border-ivory-dark rounded p-6 mb-8 flex flex-col sm:flex-row items-center sm:items-start justify-between gap-6">
+          <div class="flex items-center gap-4">
+            <div id="profile-avatar-letter"
+              class="w-16 h-16 rounded-full bg-forest text-ivory font-serif text-2xl flex items-center justify-center">
+              U
+            </div>
+            <div>
+              <h1 id="profile-display-name" class="font-serif text-2xl text-charcoal">Demo Shopper</h1>
+              <p id="profile-display-email" class="text-xs text-grey">shopper@undo.market</p>
+              <span
+                class="inline-block mt-2 text-[10px] bg-sage text-forest px-2 py-0.5 rounded font-semibold uppercase tracking-wider">
+                Active Member • Verified
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <a href="sell.html" class="btn-primary text-xs py-2 px-3">List New Item</a>
+            <button id="btn-account-logout" class="btn-ghost text-xs py-2 px-3">Sign Out</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+
+          <!-- LEFT: Orders & Listings (Col 1 to 8) -->
+          <div class="md:col-span-8 space-y-8">
+
+            <!-- Order History -->
+            <div>
+              <div class="flex items-center justify-between mb-4 pb-2 border-b border-ivory-dark">
+                <h2 class="font-serif text-xl text-charcoal">Simulated Order History</h2>
+                <span class="text-xs text-grey">Saved in LocalStorage</span>
+              </div>
+
+              <div id="account-orders-list">
+                <!-- Rendered by account.js -->
+              </div>
+
+              <div id="account-orders-empty"
+                class="p-8 bg-white border border-ivory-dark rounded text-center text-xs text-grey hidden">
+                <p>No simulated orders yet. Complete a checkout test to view it here.</p>
+                <a href="shop.html" class="text-forest font-semibold mt-2 inline-block hover:underline">Explore Pieces
+                  →</a>
+              </div>
+            </div>
+
+            <!-- My Listings -->
+            <div>
+              <div class="flex items-center justify-between mb-4 pb-2 border-b border-ivory-dark">
+                <h2 class="font-serif text-xl text-charcoal">My Active Listings</h2>
+                <a href="sell.html" class="text-xs text-forest hover:underline font-medium">+ New Listing</a>
+              </div>
+
+              <div id="account-listings-list">
+                <!-- Rendered by account.js -->
+              </div>
+
+              <div id="account-listings-empty"
+                class="p-8 bg-white border border-ivory-dark rounded text-center text-xs text-grey hidden">
+                <p>You haven't listed any items for sale yet.</p>
+                <a href="sell.html" class="btn-primary text-xs py-2 px-4 mt-3 inline-flex">Sell an Item Now</a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT: Saved Addresses & Settings (Col 9 to 12) -->
+          <div class="md:col-span-4 space-y-6">
+
+            <!-- Saved Addresses -->
+            <div class="bg-white border border-ivory-dark rounded p-5">
+              <h3 class="font-semibold text-sm text-charcoal mb-3">Saved Delivery Address</h3>
+              <p class="text-xs text-charcoal leading-relaxed font-medium">Ananya Sharma</p>
+              <p class="text-xs text-grey leading-relaxed mt-0.5">
+                42 Indiranagar 12th Main Road<br>
+                Bengaluru, Karnataka - 560038<br>
+                Phone: +91 98765 43210
+              </p>
+              <span
+                class="inline-block mt-3 text-[10px] bg-ivory text-grey px-2 py-0.5 rounded border border-ivory-dark">Default</span>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="bg-white border border-ivory-dark rounded p-5 space-y-2 text-xs">
+              <h3 class="font-semibold text-sm text-charcoal mb-2">Helpful Links</h3>
+              <a href="wishlist.html" class="block text-grey hover:text-forest py-1">View Saved Wishlist →</a>
+              <a href="about.html" class="block text-grey hover:text-forest py-1">Circular Fashion Philosophy →</a>
+              <a href="app.html" class="block text-orange font-medium py-1">Switch to Mobile App View →</a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+    <a href="index.html" class="mobile-bottom-nav__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      </svg>
+      <span>Home</span>
+    </a>
+    <a href="shop.html" class="mobile-bottom-nav__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.3-4.3" />
+      </svg>
+      <span>Explore</span>
+    </a>
+    <a href="sell.html" class="mobile-bottom-nav__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 8v8" />
+        <path d="M8 12h8" />
+      </svg>
+      <span>Sell</span>
+    </a>
+    <a href="wishlist.html" class="mobile-bottom-nav__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path
+          d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+      </svg>
+      <span>Saved</span>
+    </a>
+    <a href="account.html" class="mobile-bottom-nav__item is-active">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </svg>
+      <span>Account</span>
+    </a>
+  </nav>
+
+  <footer class="site-footer pt-12 pb-8 mt-auto">
+    <div class="container text-center text-xs text-ivory/60 space-y-2">
+      <div class="flex items-center justify-center gap-2 mb-2">
+        <img src="assets/images/logo.png" alt="UNDO Logo" class="h-8 w-8 object-contain rounded bg-ivory p-0.5">
+        <span class="font-serif text-lg text-ivory">UNDO</span>
+      </div>
+      <p>A circular-economy marketplace prototype for academic product design evaluation.</p>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/account.js"></script>
+</body>
+
+</html>

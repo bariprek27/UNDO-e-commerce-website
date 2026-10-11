@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop Catalogue | UNDO — Pre-Loved, Reimagined</title>
+  <meta name="description"
+    content="Browse authentic pre-loved fashion, shoes, bags, jewellery, and vintage home items across India.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: { DEFAULT: '#233D35', light: '#2E5248' },
+            ivory: { DEFAULT: '#F7F3EB', dark: '#EDE8DE' },
+            sage: '#DCE4D8',
+            orange: '#C76B45',
+            charcoal: '#252722',
+            grey: '#77786F'
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    @media (max-width: 1023px) {
+      #shop-filter-sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: min(85vw, 340px);
+        height: 100vh;
+        background: var(--ivory);
+        z-index: 250;
+        overflow-y: auto;
+        padding: 1.5rem;
+        transition: left 0.3s ease;
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+      }
+
+      #shop-filter-sidebar.mobile-drawer-open {
+        left: 0;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-ivory text-charcoal font-sans antialiased flex flex-col min-h-screen">
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container py-4 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="undo-brand" aria-label="UNDO Home">
+          <img src="assets/images/logo.png" alt="UNDO Logo" class="undo-logo-img">
+          <span class="undo-wordmark"></span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-6" aria-label="Primary Navigation">
+          <a href="shop.html" class="nav-link is-active" data-nav-link>Shop All</a>
+          <a href="shop.html?category=Clothing" class="nav-link">Clothing</a>
+          <a href="shop.html?category=Shoes" class="nav-link">Shoes</a>
+          <a href="shop.html?category=Bags" class="nav-link">Bags</a>
+          <a href="shop.html?category=Home%20%26%20Living" class="nav-link">Home & Living</a>
+          <a href="about.html" class="nav-link">The Circular Story</a>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="sell.html" class="btn-primary text-xs py-2 px-3.5 hidden sm:inline-flex">Sell an Item</a>
+        <a href="app.html"
+          class="hidden md:inline-flex items-center gap-1.5 text-xs text-forest bg-sage/60 px-2.5 py-1.5 rounded hover:bg-sage transition-colors font-medium">
+          Mobile App View
+        </a>
+        <a href="wishlist.html" class="nav-icon-btn" aria-label="Wishlist">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+          <span class="nav-badge" data-wishlist-count style="display:none;">0</span>
+        </a>
+        <a href="account.html" class="nav-icon-btn" aria-label="Account">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+        </a>
+        <a href="cart.html" class="nav-icon-btn" aria-label="Cart">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+            <path d="M3 6h18" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          <span class="nav-badge" data-cart-count style="display:none;">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filter Overlay for Mobile -->
+  <div id="filter-drawer-overlay" class="fixed inset-0 bg-black/40 z-200 hidden"></div>
+
+  <!-- MAIN CATALOGUE CONTAINER -->
+  <main id="main-content" class="flex-1 container py-8">
+
+    <!-- Catalogue Header & Top Bar -->
+    <div class="mb-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+        <div>
+          <span class="section-eyebrow">Circular Marketplace</span>
+          <h1 class="section-title">Pre-Loved Catalogue</h1>
+          <p id="product-count-display" class="text-xs text-grey mt-1 font-medium">Loading collection...</p>
+        </div>
+
+        <!-- Search input field -->
+        <div class="search-wrap w-full md:w-80">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+          <input type="search" id="shop-search-input" class="form-input text-sm"
+            placeholder="Search by keyword, brand, colour..." aria-label="Search product catalogue">
+        </div>
+      </div>
+
+      <!-- Quick Category Navigation Bar -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-ivory-dark" role="tablist"
+        aria-label="Categories">
+        <button
+          class="px-3.5 py-1.5 rounded-full text-xs font-medium border border-ivory-dark bg-forest text-ivory transition-colors"
+          data-filter-cat="All">All Categories</button>
+        <button
+          class="px-3.5 py-1.5 rounded-full text-xs font-medium border border-ivory-dark bg-white text-charcoal hover:border-forest transition-colors"
+          data-filter-cat="Clothing">Clothing</button>
+        <button
+          class="px-3.5 py-1.5 rounded-full text-xs font-medium border border-ivory-dark bg-white text-charcoal hover:border-forest transition-colors"
+          data-filter-cat="Shoes">Shoes</button>
+        <button
+          class="px-3.5 py-1.5 rounded-full text-xs font-medium border border-ivory-dark bg-white text-charcoal hover:border-forest transition-colors"
+          data-filter-cat="Bags">Bags</button>
+        <button
+          class="px-3.5 py-1.5 rounded-full text-xs font-medium border border-ivory-dark bg-white text-charcoal hover:border-forest transition-colors"
+          data-filter-cat="Accessories">Accessories</button>
+        <button
+          class="px-3.5 py-1.5 rounded-full text-xs font-medium border border-ivory-dark bg-white text-charcoal hover:border-forest transition-colors"
+          data-filter-cat="Jewellery">Jewellery</button>
+        <button
+          class="px-3.5 py-1.5 rounded-full text-xs font-medium border border-ivory-dark bg-white text-charcoal hover:border-forest transition-colors"
+          data-filter-cat="Home & Living">Home & Living</button>
+      </div>
+
+      <!-- Sub-Bar: Active Chips, Clear All & Sort Options -->
+      <div class="flex flex-wrap items-center justify-between gap-4 py-4">
+        <!-- Active Filter Chips -->
+        <div class="flex flex-wrap items-center gap-2" id="active-filter-chips">
+          <!-- Populated by shop.js -->
+        </div>
+
+        <div class="flex items-center gap-4 ml-auto">
+          <!-- Mobile Filter Button Trigger -->
+          <button id="open-filter-drawer"
+            class="lg:hidden inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 border border-charcoal rounded bg-white">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="4" x2="20" y1="21" y2="21" />
+              <line x1="4" x2="20" y1="3" y2="3" />
+              <line x1="4" x2="20" y1="12" y2="12" />
+              <line x1="14" x2="14" y1="9" y2="15" />
+              <line x1="8" x2="8" y1="18" y2="24" />
+              <line x1="16" x2="16" y1="0" y2="6" />
+            </svg>
+            Filter Options
+          </button>
+
+          <!-- Clear Filters -->
+          <div id="clear-filters-action-wrap" class="hidden">
+            <button id="clear-all-filters-btn" class="text-xs text-orange font-medium hover:underline">Clear all
+              filters</button>
+          </div>
+
+          <!-- Sort Select -->
+          <div class="flex items-center gap-2">
+            <label for="shop-sort-select" class="text-xs text-grey whitespace-nowrap">Sort by:</label>
+            <div class="form-select-wrap">
+              <select id="shop-sort-select" class="form-select text-xs py-1.5 pl-3 pr-7 bg-white">
+                <option value="recommended">Curated / Recommended</option>
+                <option value="newest">Newest Listed</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN TWO-COLUMN LAYOUT -->
+    <div class="flex items-start gap-8">
+
+      <!-- LEFT: Filter Sidebar (Desktop and Mobile Drawer) -->
+      <aside id="shop-filter-sidebar" class="filter-sidebar" aria-label="Product Filters">
+        <div class="flex items-center justify-between pb-4 lg:hidden border-b border-ivory-dark mb-4">
+          <span class="font-semibold text-sm">Refine Selection</span>
+          <button id="close-filter-drawer" class="text-lg p-1 text-grey hover:text-charcoal"
+            aria-label="Close filters">✕</button>
+        </div>
+
+        <!-- 1. Price Filter -->
+        <div class="filter-group">
+          <div class="filter-group__title">
+            <span>Price Range</span>
+          </div>
+          <div class="space-y-2">
+            <div class="flex justify-between text-xs text-grey">
+              <span>₹0</span>
+              <span id="price-range-display" class="font-medium text-charcoal">Up to ₹10,000</span>
+            </div>
+            <input type="range" id="price-max-range" min="200" max="10000" step="100" value="10000" class="w-full"
+              aria-label="Filter maximum price in rupees">
+          </div>
+        </div>
+
+        <!-- 2. Condition Filter -->
+        <div class="filter-group">
+          <div class="filter-group__title">
+            <span>Condition</span>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="filter-checkbox">
+              <input type="checkbox" value="Like New" class="condition-checkbox">
+              <span class="text-xs">Like New</span>
+            </label>
+            <label class="filter-checkbox">
+              <input type="checkbox" value="Excellent" class="condition-checkbox">
+              <span class="text-xs">Excellent</span>
+            </label>
+            <label class="filter-checkbox">
+              <input type="checkbox" value="Good" class="condition-checkbox">
+              <span class="text-xs">Good</span>
+            </label>
+            <label class="filter-checkbox">
+              <input type="checkbox" value="Gently Used" class="condition-checkbox">
+              <span class="text-xs">Gently Used</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 3. Colour Filter -->
+        <div class="filter-group">
+          <div class="filter-group__title">
+            <span>Tone / Colour</span>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="filter-checkbox">
+              <input type="checkbox" value="Black" class="colour-filter-checkbox">
+              <span class="text-xs">Black / Charcoal</span>
+            </label>
+            <label class="filter-checkbox">
+              <input type="checkbox" value="White" class="colour-filter-checkbox">
+              <span class="text-xs">White / Ecru / Cream</span>
+            </label>
+            <label class="filter-checkbox">
+              <input type="checkbox" value="Indigo" class="colour-filter-checkbox">
+              <span class="text-xs">Indigo / Blue</span>
+            </label>
+            <label class="filter-checkbox">
+              <input type="checkbox" value="Tan" class="colour-filter-checkbox">
+              <span class="text-xs">Tan / Brown / Cognac</span>
+            </label>
+            <label class="filter-checkbox">
+              <input type="checkbox" value="Green" class="colour-filter-checkbox">
+              <span class="text-xs">Olive / Sage / Green</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 4. Brands Filter -->
+        <div class="filter-group">
+          <div class="filter-group__title">
+            <span>Brand / Maker</span>
+          </div>
+          <div id="brand-filter-list" class="flex flex-col gap-1.5 max-h-48 overflow-y-auto pr-1">
+            <!-- Populated by shop.js -->
+          </div>
+        </div>
+
+        <!-- 5. Seller Location Filter -->
+        <div class="filter-group">
+          <div class="filter-group__title">
+            <span>Seller Location</span>
+          </div>
+          <div class="form-select-wrap">
+            <select id="location-filter-select" class="form-select text-xs py-1.5 pl-3 pr-7 bg-white">
+              <option value="All">All Locations</option>
+            </select>
+          </div>
+        </div>
+      </aside>
+
+      <!-- RIGHT: Product Grid & Results -->
+      <section class="flex-1" aria-label="Catalogue Results">
+        <div id="shop-products-grid" class="product-grid">
+          <!-- Rendered by shop.js -->
+        </div>
+
+        <!-- Empty Results State -->
+        <div id="shop-empty-state" class="empty-state bg-white border border-ivory-dark rounded p-12 hidden">
+          <div class="empty-state__icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+              <line x1="8" x2="14" y1="11" y2="11" />
+            </svg>
+          </div>
+          <h2 class="empty-state__title">No Matching Pieces Discovered</h2>
+          <p class="empty-state__text">Try adjusting your filters, price range, or search keywords to explore more
+            pre-loved items.</p>
+          <button onclick="resetAllFilters()" class="btn-primary mt-2">Reset All Filters</button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+    <a href="index.html" class="mobile-bottom-nav__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      </svg>
+      <span>Home</span>
+    </a>
+    <a href="shop.html" class="mobile-bottom-nav__item is-active">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.3-4.3" />
+      </svg>
+      <span>Explore</span>
+    </a>
+    <a href="sell.html" class="mobile-bottom-nav__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 8v8" />
+        <path d="M8 12h8" />
+      </svg>
+      <span>Sell</span>
+    </a>
+    <a href="wishlist.html" class="mobile-bottom-nav__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path
+          d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+      </svg>
+      <span>Saved</span>
+    </a>
+    <a href="account.html" class="mobile-bottom-nav__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </svg>
+      <span>Account</span>
+    </a>
+  </nav>
+
+  <!-- Site Footer -->
+  <footer class="site-footer pt-12 pb-8 mt-16">
+    <div class="container text-center text-xs text-ivory/60 space-y-2">
+      <div class="flex items-center justify-center gap-2 mb-2">
+        <img src="assets/images/logo.png" alt="UNDO Logo" class="h-8 w-8 object-contain rounded bg-ivory p-0.5">
+        <span class="font-serif text-lg text-ivory">UNDO</span>
+      </div>
+      <p>A circular-economy marketplace prototype for academic product design evaluation.</p>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/shop.js"></script>
+</body>
+
+</html>

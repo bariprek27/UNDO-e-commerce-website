@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
+  <rect width="400" height="500" fill="#DCE4D8"/>
+  <circle cx="200" cy="210" r="48" fill="#233D35" opacity="0.15"/>
+  <path d="M176 210 L224 210 M200 186 L200 234" stroke="#233D35" stroke-width="3" stroke-linecap="round"/>
+  <text x="200" y="290" text-anchor="middle" font-family="'DM Serif Display', Georgia, serif" font-size="22" fill="#233D35">UNDO</text>
+  <text x="200" y="320" text-anchor="middle" font-family="'DM Sans', system-ui, sans-serif" font-size="13" fill="#77786F" letter-spacing="1">PRE-LOVED, REIMAGINED</text>
+</svg>

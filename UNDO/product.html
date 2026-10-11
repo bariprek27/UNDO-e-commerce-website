@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Piece Details | UNDO — Pre-Loved, Reimagined</title>
+  <meta name="description"
+    content="Detailed condition, sizing, sustainability, and seller profile for pre-loved marketplace piece.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: { DEFAULT: '#233D35', light: '#2E5248' },
+            ivory: { DEFAULT: '#F7F3EB', dark: '#EDE8DE' },
+            sage: '#DCE4D8',
+            orange: '#C76B45',
+            charcoal: '#252722',
+            grey: '#77786F'
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="bg-ivory text-charcoal font-sans antialiased flex flex-col min-h-screen">
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container py-4 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="undo-brand" aria-label="UNDO Home">
+          <img src="assets/images/logo.png" alt="UNDO Logo" class="undo-logo-img">
+          <span class="undo-wordmark"></span>
+        </a>
+        <nav class="hidden lg:flex items-center gap-6" aria-label="Primary Navigation">
+          <a href="shop.html" class="nav-link">Shop All</a>
+          <a href="shop.html?category=Clothing" class="nav-link">Clothing</a>
+          <a href="shop.html?category=Shoes" class="nav-link">Shoes</a>
+          <a href="shop.html?category=Bags" class="nav-link">Bags</a>
+          <a href="shop.html?category=Home%20%26%20Living" class="nav-link">Home & Living</a>
+          <a href="about.html" class="nav-link">The Circular Story</a>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="sell.html" class="btn-primary text-xs py-2 px-3.5 hidden sm:inline-flex">Sell an Item</a>
+        <a href="wishlist.html" class="nav-icon-btn" aria-label="Wishlist">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+          <span class="nav-badge" data-wishlist-count style="display:none;">0</span>
+        </a>
+        <a href="cart.html" class="nav-icon-btn" aria-label="Cart">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+            <path d="M3 6h18" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          <span class="nav-badge" data-cart-count style="display:none;">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN PRODUCT DETAILS CONTAINER -->
+  <main id="main-content" class="flex-1 container py-6">
+
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs mb-6" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="breadcrumbs__sep">/</span>
+      <a href="shop.html">Shop</a>
+      <span class="breadcrumbs__sep">/</span>
+      <a href="#" id="crumb-category">Category</a>
+      <span class="breadcrumbs__sep">/</span>
+      <span id="crumb-product" class="text-charcoal font-medium truncate max-w-xs">Piece</span>
+    </nav>
+
+    <!-- Main 2-Column Section -->
+    <div id="product-detail-container" class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-16">
+
+      <!-- LEFT: Photo Gallery (Col 1 to 7) -->
+      <div class="lg:col-span-7">
+        <div class="product-gallery">
+          <!-- Thumbnails -->
+          <div id="gallery-thumbnails" class="gallery-thumbs" role="tablist" aria-label="Product image options">
+            <!-- Populated by product.js -->
+          </div>
+
+          <!-- Main Hero Image -->
+          <div class="gallery-main relative">
+            <img id="main-product-image" src="assets/images/fallback.svg" alt="Detailed photograph of the item"
+              class="w-full h-full object-cover" />
+            <span
+              class="absolute top-4 left-4 text-xs font-semibold px-2.5 py-1 bg-white/90 text-charcoal rounded shadow-sm">
+              Single 1-of-1 Listing
+            </span>
+          </div>
+        </div>
+
+        <!-- Environmental & Sizing Advisory Notice -->
+        <div class="mt-8 p-4 bg-sage/40 border border-sage rounded flex items-start gap-3">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            class="text-forest flex-shrink-0 mt-0.5">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 16v-4" />
+            <path d="M12 8h.01" />
+          </svg>
+          <div class="text-xs text-charcoal leading-relaxed">
+            <strong class="font-semibold block text-forest">Fit & Sustainability Advisory</strong>
+            Because every pre-loved piece is unique, please verify the measurements below against a favourite garment
+            before purchasing to minimise avoidable shipping returns.
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Product Info, Seller, Actions (Col 8 to 12) -->
+      <div class="lg:col-span-5 flex flex-col gap-6">
+
+        <!-- Title, Brand & Pricing -->
+        <div class="border-b border-ivory-dark pb-6">
+          <p id="product-brand" class="text-xs uppercase tracking-wider text-grey font-semibold mb-1 hidden"></p>
+          <h1 id="product-title" class="font-serif text-3xl md:text-4xl text-charcoal leading-tight mb-3"></h1>
+
+          <div class="flex items-baseline gap-3">
+            <span id="product-price" class="text-2xl md:text-3xl font-semibold text-charcoal"></span>
+            <span id="product-original-price" class="text-sm text-grey line-through hidden"></span>
+            <span id="product-savings-badge"
+              class="text-xs font-bold px-2 py-0.5 bg-orange text-white rounded hidden"></span>
+          </div>
+          <p class="text-xs text-grey mt-1">Inclusive of all local demo taxes</p>
+        </div>
+
+        <!-- Condition Card Breakdown -->
+        <div class="bg-white border border-ivory-dark rounded p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs uppercase tracking-wider text-grey font-semibold">Inspected Condition</span>
+            <span id="product-condition-badge" class="condition-badge"></span>
+          </div>
+          <p id="product-condition-note" class="text-xs text-charcoal leading-relaxed"></p>
+        </div>
+
+        <!-- Specifics Grid: Size, Colour, Category -->
+        <div class="grid grid-cols-2 gap-3 text-xs bg-white border border-ivory-dark rounded p-4">
+          <div>
+            <span class="text-grey block">Size / Dimensions:</span>
+            <span id="product-size" class="font-semibold text-charcoal text-sm mt-0.5 block"></span>
+          </div>
+          <div>
+            <span class="text-grey block">Colour / Shade:</span>
+            <span id="product-colour" class="font-semibold text-charcoal text-sm mt-0.5 block"></span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-3 pt-2">
+          <button class="btn-primary flex-1 py-3 justify-center text-sm font-medium" data-action-add-to-cart>
+            Add to Cart — 1 of 1
+          </button>
+          <button class="btn-secondary py-3 px-5 justify-center text-sm" data-action-toggle-wishlist>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            </svg>
+            <span class="wishlist-text ml-2">Save</span>
+          </button>
+        </div>
+
+        <!-- Seller Profile Card -->
+        <div class="seller-card">
+          <div id="seller-avatar" class="seller-avatar">S</div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <span id="seller-name" class="font-medium text-sm text-charcoal"></span>
+              <span id="seller-verified-badge"
+                class="text-[10px] bg-forest text-ivory px-1.5 py-0.5 rounded font-medium hidden">Verified Seller</span>
+            </div>
+            <div class="flex items-center gap-3 text-xs text-grey mt-0.5">
+              <span id="seller-rating" class="text-orange font-medium">4.8 ★</span>
+              <span>•</span>
+              <span id="seller-location"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Accordions: Description, Shipping & Returns, Environmental Impact -->
+        <div class="border-t border-ivory-dark pt-2 divide-y divide-ivory-dark">
+          <!-- Accordion 1: Description -->
+          <div class="py-3">
+            <button
+              class="accordion-toggle w-full flex items-center justify-between text-left font-medium text-sm text-charcoal py-1">
+              <span>Item Description & Details</span>
+              <span class="accordion-icon text-lg text-grey">−</span>
+            </button>
+            <div class="accordion__content is-open mt-2 text-xs text-grey leading-relaxed" id="product-description">
+            </div>
+          </div>
+
+          <!-- Accordion 2: Shipping Estimate -->
+          <div class="py-3">
+            <button
+              class="accordion-toggle w-full flex items-center justify-between text-left font-medium text-sm text-charcoal py-1">
+              <span>Shipping & Delivery Estimate</span>
+              <span class="accordion-icon text-lg text-grey">+</span>
+            </button>
+            <div class="accordion__content mt-2 text-xs text-grey leading-relaxed">
+              <p>Standard delivery in 3–5 working days to metro cities across India (free on orders above ₹1,500).
+                Packaged with 100% recycled paper mailers. Labelled clearly as an illustrative estimate for this
+                prototype.</p>
+            </div>
+          </div>
+
+          <!-- Accordion 3: Sustainability Impact -->
+          <div class="py-3">
+            <button
+              class="accordion-toggle w-full flex items-center justify-between text-left font-medium text-sm text-charcoal py-1">
+              <span>Circular Responsibility</span>
+              <span class="accordion-icon text-lg text-grey">+</span>
+            </button>
+            <div class="accordion__content mt-2 text-xs text-grey leading-relaxed" id="product-sustainability">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SIMILAR PIECES SECTION -->
+    <section class="section-pad border-t border-ivory-dark mt-8" aria-labelledby="similar-heading">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <span class="section-eyebrow">More From This Department</span>
+          <h2 id="similar-heading" class="section-title">Similar Curated Finds</h2>
+        </div>
+        <a href="shop.html" class="text-xs font-semibold text-forest hover:underline">View All →</a>
+      </div>
+      <div id="similar-products-grid" class="product-grid">
+        <!-- Rendered by product.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Bottom Purchase Bar (Thumb Reach / Mobile & Desktop) -->
+  <aside class="sticky-buy-bar shadow-md" aria-label="Quick Purchase Bar">
+    <div class="truncate max-w-xs">
+      <span id="sticky-bar-title" class="font-medium text-xs text-charcoal truncate block"></span>
+      <span id="sticky-bar-price" class="font-semibold text-sm text-forest"></span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="btn-primary py-2 px-4 text-xs" data-action-add-to-cart>
+        Add to Cart
+      </button>
+    </div>
+  </aside>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+    <a href="index.html" class="mobile-bottom-nav__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      </svg>
+      <span>Home</span>
+    </a>
+    <a href="shop.html" class="mobile-bottom-nav__item is-active">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.3-4.3" />
+      </svg>
+      <span>Explore</span>
+    </a>
+    <a href="sell.html" class="mobile-bottom-nav__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 8v8" />
+        <path d="M8 12h8" />
+      </svg>
+      <span>Sell</span>
+    </a>
+    <a href="wishlist.html" class="mobile-bottom-nav__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path
+          d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+      </svg>
+      <span>Saved</span>
+    </a>
+    <a href="account.html" class="mobile-bottom-nav__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </svg>
+      <span>Account</span>
+    </a>
+  </nav>
+
+  <footer class="site-footer pt-12 pb-8">
+    <div class="container text-center text-xs text-ivory/60 space-y-2">
+      <div class="flex items-center justify-center gap-2 mb-2">
+        <img src="assets/images/logo.png" alt="UNDO Logo" class="h-8 w-8 object-contain rounded bg-ivory p-0.5">
+        <span class="font-serif text-lg text-ivory">UNDO</span>
+      </div>
+      <p>A circular-economy marketplace prototype for academic product design evaluation.</p>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/product.js"></script>
+</body>
+
+</html>

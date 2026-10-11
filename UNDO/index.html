@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNDO — Pre-Loved, Reimagined | Circular Fashion Marketplace</title>
+  <meta name="description"
+    content="Discover, buy, and sell curated vintage, pre-owned clothing, shoes, bags, jewellery, and home decor. Good things deserve another round.">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: { DEFAULT: '#233D35', light: '#2E5248' },
+            ivory: { DEFAULT: '#F7F3EB', dark: '#EDE8DE' },
+            sage: '#DCE4D8',
+            orange: '#C76B45',
+            charcoal: '#252722',
+            grey: '#77786F'
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="bg-ivory text-charcoal font-sans antialiased flex flex-col min-h-screen">
+
+  <!-- Accessibility Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Announcement Bar -->
+  <aside id="announcement-bar" aria-label="Brand notice">
+    <span>Good finds deserve a second life. Circular shopping in India.</span>
+    <button type="button" data-dismiss-announcement aria-label="Dismiss announcement">✕</button>
+  </aside>
+
+  <!-- Navigation Header -->
+  <header class="site-header">
+    <div class="container py-4 flex items-center justify-between gap-4">
+      <!-- Left: Brand Wordmark -->
+      <div class="flex items-center gap-8">
+        <a href="index.html" class="undo-brand" aria-label="UNDO Home">
+          <img src="assets/images/logo.png" alt="UNDO Logo" class="undo-logo-img">
+          <span class="undo-wordmark"></span>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <nav class="hidden lg:flex items-center gap-6" aria-label="Primary Navigation">
+          <a href="shop.html" class="nav-link" data-nav-link>Shop All</a>
+          <a href="shop.html?category=Clothing" class="nav-link">Clothing</a>
+          <a href="shop.html?category=Shoes" class="nav-link">Shoes</a>
+          <a href="shop.html?category=Bags" class="nav-link">Bags</a>
+          <a href="shop.html?category=Home%20%26%20Living" class="nav-link">Home & Living</a>
+          <a href="about.html" class="nav-link" data-nav-link>The Circular Story</a>
+        </nav>
+      </div>
+
+      <!-- Right: Actions & Tools -->
+      <div class="flex items-center gap-3">
+        <!-- Sell CTA Button -->
+        <a href="sell.html" class="btn-primary text-xs py-2 px-3.5 hidden sm:inline-flex">
+          Sell an Item
+        </a>
+
+        <!-- Switch to Mobile App Prototype Link -->
+        <a href="app.html"
+          class="hidden md:inline-flex items-center gap-1.5 text-xs text-forest bg-sage/60 px-2.5 py-1.5 rounded hover:bg-sage transition-colors font-medium">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
+            <path d="M12 18h.01" />
+          </svg>
+          Mobile App View
+        </a>
+
+        <!-- Search Icon -->
+        <a href="shop.html" class="nav-icon-btn" aria-label="Search catalog">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+        </a>
+
+        <!-- Wishlist Link -->
+        <a href="wishlist.html" class="nav-icon-btn" aria-label="View Wishlist">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+          <span class="nav-badge" data-wishlist-count style="display:none;">0</span>
+        </a>
+
+        <!-- Account Link -->
+        <a href="account.html" class="nav-icon-btn" aria-label="Account & Profile">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+        </a>
+
+        <!-- Cart Link -->
+        <a href="cart.html" class="nav-icon-btn" aria-label="Shopping Cart">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+            <path d="M3 6h18" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          <span class="nav-badge" data-cart-count style="display:none;">0</span>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-toggle" class="nav-icon-btn lg:hidden" aria-label="Open navigation menu"
+          aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="4" x2="20" y1="12" y2="12" />
+            <line x1="4" x2="20" y1="6" y2="6" />
+            <line x1="4" x2="20" y1="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+  <aside id="mobile-menu" class="mobile-menu" aria-label="Mobile Navigation Drawer">
+    <div class="flex items-center justify-between pb-6 border-b border-ivory-dark">
+      <a href="index.html" class="undo-brand">
+        <img src="assets/images/logo.png" alt="UNDO Logo" class="undo-logo-img">
+        <span class="undo-wordmark"></span>
+      </a>
+    </div>
+    <nav class="flex flex-col gap-4 py-6" aria-label="Mobile links">
+      <a href="shop.html" class="text-lg font-medium text-charcoal hover:text-forest">Shop All Pieces</a>
+      <a href="shop.html?category=Clothing" class="text-base text-grey hover:text-forest">Clothing</a>
+      <a href="shop.html?category=Shoes" class="text-base text-grey hover:text-forest">Shoes</a>
+      <a href="shop.html?category=Bags" class="text-base text-grey hover:text-forest">Bags</a>
+      <a href="shop.html?category=Accessories" class="text-base text-grey hover:text-forest">Accessories</a>
+      <a href="shop.html?category=Jewellery" class="text-base text-grey hover:text-forest">Jewellery</a>
+      <a href="shop.html?category=Home%20%26%20Living" class="text-base text-grey hover:text-forest">Home & Living</a>
+      <a href="sell.html" class="text-base text-orange font-semibold mt-2">Sell an Item →</a>
+      <a href="about.html" class="text-base text-grey hover:text-forest">Circular Fashion Story</a>
+      <a href="app.html" class="text-base text-forest font-medium mt-4 p-2 bg-sage/50 rounded">Open Mobile App Prototype
+        📱</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main id="main-content" class="flex-1">
+
+    <!-- EDITORIAL HERO SECTION -->
+    <section class="hero-section border-b border-ivory-dark" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <span class="section-eyebrow">A Circular Wardrobe</span>
+        <h1 id="hero-title" class="hero-headline">
+          Good clothes.<br>Second chances.
+        </h1>
+        <p class="hero-subtext">
+          Find pieces with a past. Give them a future. Carefully authenticated, beautifully worn vintage and pre-loved
+          garments from closets across India.
+        </p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="shop.html" class="btn-primary">Explore the Collection</a>
+          <a href="sell.html" class="btn-secondary">Sell Your Pre-Loved</a>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="grid grid-cols-3 gap-4 pt-12 mt-12 border-t border-ivory-dark">
+          <div>
+            <p class="font-serif text-2xl text-forest">1-of-1</p>
+            <p class="text-xs text-grey mt-1">Unique curated pieces</p>
+          </div>
+          <div>
+            <p class="font-serif text-2xl text-forest">100%</p>
+            <p class="text-xs text-grey mt-1">Condition verified</p>
+          </div>
+          <div>
+            <p class="font-serif text-2xl text-forest">Zero</p>
+            <p class="text-xs text-grey mt-1">New textile waste</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=80"
+          alt="Artfully styled vintage clothing on a model in warm editorial light"
+          class="w-full h-full object-cover" />
+      </div>
+    </section>
+
+    <!-- CURATED CATEGORIES (Asymmetric Composition) -->
+    <section class="section-pad container" aria-labelledby="categories-heading">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="section-eyebrow">Discover by Department</span>
+          <h2 id="categories-heading" class="section-title">Curated Categories</h2>
+        </div>
+        <a href="shop.html" class="text-sm font-medium text-forest hover:underline">
+          View all categories →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- Clothing -->
+        <a href="shop.html?category=Clothing" class="group relative rounded overflow-hidden aspect-[3/4] bg-sage">
+          <img src="https://images.unsplash.com/photo-1551537482-f2075a1d41f2?w=600&q=80"
+            alt="Vintage denim and clothing"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent flex items-end p-4">
+            <span class="text-white font-medium text-base">Clothing</span>
+          </div>
+        </a>
+
+        <!-- Shoes -->
+        <a href="shop.html?category=Shoes" class="group relative rounded overflow-hidden aspect-[3/4] bg-sage">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80" alt="Second-hand footwear"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent flex items-end p-4">
+            <span class="text-white font-medium text-base">Shoes</span>
+          </div>
+        </a>
+
+        <!-- Bags & Accessories -->
+        <a href="shop.html?category=Bags" class="group relative rounded overflow-hidden aspect-[3/4] bg-sage">
+          <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80" alt="Pre-owned leather bags"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent flex items-end p-4">
+            <span class="text-white font-medium text-base">Bags</span>
+          </div>
+        </a>
+
+        <!-- Home & Living -->
+        <a href="shop.html?category=Home%20%26%20Living"
+          class="group relative rounded overflow-hidden aspect-[3/4] bg-sage">
+          <img src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600&q=80"
+            alt="Vintage homeware and decor"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent flex items-end p-4">
+            <span class="text-white font-medium text-base">Home & Living</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- RECENTLY DISCOVERED (Product Grid) -->
+    <section class="section-pad bg-white border-y border-ivory-dark" aria-labelledby="recent-heading">
+      <div class="container">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+          <div>
+            <span class="section-eyebrow">Fresh Listings</span>
+            <h2 id="recent-heading" class="section-title">Recently Discovered</h2>
+            <p class="section-subtitle">Real second-hand pieces listed by verified sellers across Delhi, Mumbai,
+              Bengaluru and beyond.</p>
+          </div>
+          <a href="shop.html" class="btn-ghost self-start md:self-end">Browse full inventory →</a>
+        </div>
+
+        <div id="featured-products-grid" class="product-grid">
+          <!-- Rendered by home.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- EDITORIAL FEATURE: Not new. Still noteworthy. -->
+    <section class="section-pad container" aria-labelledby="editorial-heading">
+      <div class="editorial-feature bg-sage/40 rounded-lg p-6 md:p-12 border border-sage">
+        <div class="relative aspect-[4/3] rounded overflow-hidden shadow-sm">
+          <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&q=80"
+            alt="Vintage editorial fashion ensemble" class="w-full h-full object-cover" />
+        </div>
+        <div class="flex flex-col justify-center">
+          <span class="section-eyebrow">Editorial Selection</span>
+          <h2 id="editorial-heading" class="section-title mb-4">
+            Not new.<br>Still noteworthy.
+          </h2>
+          <p class="text-grey text-base leading-relaxed mb-6">
+            Fashion wasn't meant to be single-use. We believe the most interesting outfits are assembled with patience:
+            an archival Levi's jacket from 1998, an oxidised silver pendant from Jaipur, and an Italian leather tote
+            that has aged into perfection.
+          </p>
+          <div class="flex items-center gap-4">
+            <a href="shop.html?condition=Like%20New" class="btn-primary text-xs py-2.5 px-4">Shop Curated Finds</a>
+            <a href="about.html" class="text-xs font-semibold text-charcoal hover:underline">Read the Story →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOP BY CONDITION -->
+    <section class="section-pad bg-ivory border-t border-ivory-dark" aria-labelledby="condition-heading">
+      <div class="container">
+        <div class="text-center max-w-xl mx-auto mb-10">
+          <span class="section-eyebrow">Full Transparency</span>
+          <h2 id="condition-heading" class="section-title">Shop by Condition</h2>
+          <p class="section-subtitle mx-auto">We inspect and categorise every listing so there are no surprises at your
+            doorstep.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Like New -->
+          <a href="shop.html?condition=Like%20New"
+            class="p-6 bg-white border border-ivory-dark rounded hover:border-forest transition-colors flex flex-col justify-between">
+            <div>
+              <span class="condition-badge condition-like-new mb-3">Like New</span>
+              <h3 class="font-medium text-base text-charcoal mt-2">Flawless & Unworn</h3>
+              <p class="text-xs text-grey mt-2 leading-relaxed">No visible wear or tear. Often tags attached or worn
+                once for a photoshoot.</p>
+            </div>
+            <span class="text-xs text-forest font-semibold mt-4">View Pieces →</span>
+          </a>
+
+          <!-- Excellent -->
+          <a href="shop.html?condition=Excellent"
+            class="p-6 bg-white border border-ivory-dark rounded hover:border-forest transition-colors flex flex-col justify-between">
+            <div>
+              <span class="condition-badge condition-excellent mb-3">Excellent</span>
+              <h3 class="font-medium text-base text-charcoal mt-2">Barely Used</h3>
+              <p class="text-xs text-grey mt-2 leading-relaxed">Minor indications of gentle wear. Cleaned, hardware
+                pristine, ready for wear.</p>
+            </div>
+            <span class="text-xs text-forest font-semibold mt-4">View Pieces →</span>
+          </a>
+
+          <!-- Good -->
+          <a href="shop.html?condition=Good"
+            class="p-6 bg-white border border-ivory-dark rounded hover:border-forest transition-colors flex flex-col justify-between">
+            <div>
+              <span class="condition-badge condition-good mb-3">Good</span>
+              <h3 class="font-medium text-base text-charcoal mt-2">Authentic Character</h3>
+              <p class="text-xs text-grey mt-2 leading-relaxed">Well-loved with natural patina, fading or small cosmetic
+                marks. Structurally sound.</p>
+            </div>
+            <span class="text-xs text-forest font-semibold mt-4">View Pieces →</span>
+          </a>
+
+          <!-- Gently Used -->
+          <a href="shop.html?condition=Gently%20Used"
+            class="p-6 bg-white border border-ivory-dark rounded hover:border-forest transition-colors flex flex-col justify-between">
+            <div>
+              <span class="condition-badge condition-gently-used mb-3">Gently Used</span>
+              <h3 class="font-medium text-base text-charcoal mt-2">Relaxed & Soft</h3>
+              <p class="text-xs text-grey mt-2 leading-relaxed">Comfortably worn in. Great budget bargains and rare
+                archival silhouettes.</p>
+            </div>
+            <span class="text-xs text-forest font-semibold mt-4">View Pieces →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUSTAINABILITY STORY STRIPE -->
+    <section class="bg-forest text-ivory py-16" aria-labelledby="circular-story-heading">
+      <div class="container flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div class="max-w-xl">
+          <span class="text-xs font-semibold tracking-widest uppercase text-sage">Responsible Fashion</span>
+          <h2 id="circular-story-heading" class="font-serif text-3xl md:text-4xl mt-2 mb-4 leading-tight">
+            Extending a garment’s life by 9 months reduces its environmental footprint by nearly 30%.
+          </h2>
+          <p class="text-ivory/80 text-sm leading-relaxed">
+            We don’t believe in guilt-based marketing or fabricated carbon calculators. The simple truth is that
+            rewearing what already exists is the most responsible choice in personal style.
+          </p>
+        </div>
+        <div class="flex-shrink-0">
+          <a href="about.html" class="btn-orange">
+            Learn About Circular Fashion
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELLER CALL TO ACTION -->
+    <section class="section-pad container" aria-labelledby="seller-cta-heading">
+      <div
+        class="bg-white border border-ivory-dark rounded-lg p-8 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div class="max-w-lg">
+          <span class="section-eyebrow">Community Marketplace</span>
+          <h2 id="seller-cta-heading" class="font-serif text-3xl md:text-4xl text-charcoal mb-4">
+            Give your pieces another life.
+          </h2>
+          <p class="text-grey text-base leading-relaxed mb-6">
+            Got jackets, bags, or dresses sitting unworn in your wardrobe? Snap a few photos, set a fair price, and list
+            them on UNDO in under two minutes.
+          </p>
+          <a href="sell.html" class="btn-primary">
+            Start Selling Now
+          </a>
+        </div>
+        <div
+          class="w-full md:w-80 aspect-square bg-sage/50 rounded flex items-center justify-center p-6 text-center border border-sage">
+          <div>
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              class="mx-auto text-forest mb-3">
+              <path d="M16 16v1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1" />
+              <path d="M18 8h4a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-4" />
+              <circle cx="18" cy="12" r="1" />
+            </svg>
+            <p class="font-serif text-xl text-charcoal">Zero Listing Fees</p>
+            <p class="text-xs text-grey mt-2">Community first. Keep 100% of your listed earnings in this academic
+              prototype.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Mobile Bottom Navigation Bar (Persistent) -->
+  <nav class="mobile-bottom-nav" aria-label="Mobile Bottom App Bar">
+    <a href="index.html" class="mobile-bottom-nav__item is-active" aria-label="Home">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      </svg>
+      <span>Home</span>
+    </a>
+    <a href="shop.html" class="mobile-bottom-nav__item" aria-label="Explore Shop">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.3-4.3" />
+      </svg>
+      <span>Explore</span>
+    </a>
+    <a href="sell.html" class="mobile-bottom-nav__item" aria-label="Sell Item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 8v8" />
+        <path d="M8 12h8" />
+      </svg>
+      <span>Sell</span>
+    </a>
+    <a href="wishlist.html" class="mobile-bottom-nav__item" aria-label="Wishlist">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path
+          d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+      </svg>
+      <span>Saved</span>
+    </a>
+    <a href="account.html" class="mobile-bottom-nav__item" aria-label="Account Profile">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </svg>
+      <span>Account</span>
+    </a>
+  </nav>
+
+  <!-- Site Footer -->
+  <footer class="site-footer pt-16 pb-12 mt-auto">
+    <div class="container grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+      <!-- Col 1: Brand Info -->
+      <div class="col-span-2">
+        <a href="index.html" class="inline-flex items-center gap-2.5 text-decoration-none mb-3">
+          <img src="assets/images/logo.png" alt="UNDO Logo" class="h-10 w-10 object-contain rounded bg-ivory p-0.5">
+          <span class="font-serif text-3xl text-ivory tracking-tight">UNDO</span>
+        </a>
+        <p class="text-xs text-ivory/70 max-w-sm leading-relaxed">
+          Pre-loved, reimagined. A circular-commerce marketplace helping people discover, buy, sell, and give a second
+          life to quality items across India.
+        </p>
+        <p class="text-[11px] text-sage mt-4 font-mono">Product Design Academic Prototype (Frontend Only)</p>
+      </div>
+
+      <!-- Col 2: Marketplace -->
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-sage mb-4">Discover</p>
+        <ul class="flex flex-col gap-2.5 text-sm" role="list">
+          <li><a href="shop.html?category=Clothing" class="footer-link">Clothing</a></li>
+          <li><a href="shop.html?category=Shoes" class="footer-link">Shoes</a></li>
+          <li><a href="shop.html?category=Bags" class="footer-link">Bags</a></li>
+          <li><a href="shop.html?category=Accessories" class="footer-link">Accessories</a></li>
+          <li><a href="shop.html?category=Home%20%26%20Living" class="footer-link">Home & Living</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Community & Selling -->
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-sage mb-4">Community</p>
+        <ul class="flex flex-col gap-2.5 text-sm" role="list">
+          <li><a href="sell.html" class="footer-link">Sell an Item</a></li>
+          <li><a href="about.html" class="footer-link">How It Works</a></li>
+          <li><a href="about.html#sustainability" class="footer-link">Circular Fashion Guide</a></li>
+          <li><a href="account.html" class="footer-link">Demo Account</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Prototype Views -->
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-sage mb-4">Experience</p>
+        <ul class="flex flex-col gap-2.5 text-sm" role="list">
+          <li><a href="app.html" class="footer-link text-orange">Mobile App Prototype →</a></li>
+          <li><a href="cart.html" class="footer-link">Shopping Cart</a></li>
+          <li><a href="wishlist.html" class="footer-link">Saved Pieces</a></li>
+          <li><a href="checkout.html" class="footer-link">Simulated Checkout</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div
+      class="container border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-ivory/50 gap-4">
+      <p>© 2024–2026 UNDO Marketplace. Created for Product Design Project.</p>
+      <p>Demonstrating UI/UX, Ergonomics, Accessibility & Circular Design.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/home.js"></script>
+</body>
+
+</html>
